@@ -43,45 +43,48 @@
     <div class="container">
         <div class="content">
             <div class="ball">
-                <div class="inside-ball"></div>
-                <div class="particules"></div>
-                <div class="particules"></div>
-                <div class="particules"></div>
-                <div class="particules"></div>
-                <div class="particules"></div>
-                <div class="particules"></div>
-                <div class="particules"></div>
             </div>
         </div>
     </div>
     <script>
-        const particules = document.querySelectorAll(".particules");
+        const PARTICULES_CLASS = 'particules';
+        const PARTICULES_NUMBER = 7;
+
+        const wrapperContent = document.querySelector('.ball')
+
+        const elementsCreated = Array(PARTICULES_NUMBER).fill('div').map((el) => wrapperContent.appendChild(document.createElement(el)))
+
+        elementsCreated.forEach(el => el.setAttribute('class', PARTICULES_CLASS))
+
+        const particules = document.querySelectorAll(`.${PARTICULES_CLASS}`);
+
         particules.forEach((particule, i) => {
-            console.log('particule', particule);
+            const transformOrigin = 50 - (i / 2) * 2;
+
             particule.style = `
                 width: ${(5 * (i + 3)) / 2}px;
                 height: ${(5 * (i + 3)) / 2}px;
                 position: absolute;
                 left: 50%;
                 top: 50%;
-                transform-origin: center;
+                transform: translate(-50%, 50%);
+                transform-origin: ${i % 2 === 0 ? '-' : '+'}${transformOrigin}px ${i % 2 === 0 ? '-' : '+'}${transformOrigin}px;
             `;
+
             particule.animate([
                 {
-                    transform: `translate(-50%, 50%) rotate(${(i * Math.random() * 300) / 3}deg)`,
-                    transformOrigin: `${i % 2 === 0 ? '-' : '+'}${(30 * (i * Math.random() + 4)) / 3}px ${i % 2 === 0 ? '-' : '+'}${(30 * (i * Math.random() + 4)) / 3}px`
+                    transform: `rotate(0deg)`,
                 },
                 { transform: 'rotate(360deg)' }
             ], {
-                duration: 2 + i * 800,
+                duration: 3500 + i * 2,
                 delay: i * 1000 / 3,
                 iterations: Infinity
             });
         })
+        
+        const insideBall = document.querySelector('.inside-ball');
+
     </script>
 </body>
-
 </html>
-
-<!-- transform: translate(-50%, 50%) rotate(${(i * Math.random() * 300) / 3}deg);
-                transform-origin: ${i % 2 === 0 ? '-' : '+'}${(30 * (i * Math.random() + 4)) / 5}px ${i % 2 === 0 ? '-' : '+'}${(30 * (i * Math.random() + 4)) / 5}px; -->

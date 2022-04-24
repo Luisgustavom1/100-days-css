@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Day #8</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .content {
+            background-color: #000;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+        }
+
+        .ball {
+            width: 90px;
+            height: 90px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .particules {
+            background-color: #fff;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="ball">
+                <div class="inside-ball"></div>
+                <div class="particules"></div>
+                <div class="particules"></div>
+                <div class="particules"></div>
+                <div class="particules"></div>
+                <div class="particules"></div>
+                <div class="particules"></div>
+                <div class="particules"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const particules = document.querySelectorAll(".particules");
+        particules.forEach((particule, i) => {
+            console.log('particule', particule);
+            particule.style = `
+                width: ${(5 * (i + 3)) / 2}px;
+                height: ${(5 * (i + 3)) / 2}px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform-origin: center;
+            `;
+            particule.animate([
+                {
+                    transform: `translate(-50%, 50%) rotate(${(i * Math.random() * 300) / 3}deg)`,
+                    transformOrigin: `${i % 2 === 0 ? '-' : '+'}${(30 * (i * Math.random() + 4)) / 3}px ${i % 2 === 0 ? '-' : '+'}${(30 * (i * Math.random() + 4)) / 3}px`
+                },
+                { transform: 'rotate(360deg)' }
+            ], {
+                duration: 2 + i * 800,
+                delay: i * 1000 / 3,
+                iterations: Infinity
+            });
+        })
+    </script>
+</body>
+
+</html>
+
+<!-- transform: translate(-50%, 50%) rotate(${(i * Math.random() * 300) / 3}deg);
+                transform-origin: ${i % 2 === 0 ? '-' : '+'}${(30 * (i * Math.random() + 4)) / 5}px ${i % 2 === 0 ? '-' : '+'}${(30 * (i * Math.random() + 4)) / 5}px; -->

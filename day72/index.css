@@ -1,0 +1,20 @@
+.container {
+  width: 480px;
+  height: 480px;
+  background: #3498db;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: grid;
+  place-items: center;
+}
+
+.ball {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px solid #FFF;
+}

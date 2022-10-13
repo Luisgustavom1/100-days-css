@@ -15,6 +15,24 @@
 .ball {
   width: 200px;
   height: 200px;
+  
+  position: absolute;
+
   border-radius: 50%;
-  border: 2px solid #FFF;
+  border: 1px solid #FFF;
+}
+
+.ball1 {
+  animation: rotate1 2000ms ease-in-out infinite forwards;
+  transform: rotate(135deg);
+}
+
+@keyframes rotate1 {
+  10% {
+    transform: rotateX(-135deg) rotateY(-135deg);
+  }
+
+  80% {
+    transform: rotateX(-235deg) rotateY(-325deg);
+  }
 }

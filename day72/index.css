@@ -20,19 +20,52 @@
 
   border-radius: 50%;
   border: 1px solid #FFF;
+  transform: rotateY(180deg) rotateX(180deg);
 }
 
 .ball1 {
-  animation: rotate1 2000ms ease-in-out infinite forwards;
-  transform: rotate(135deg);
+  animation: rotate1 4500ms ease-in-out 50ms infinite;
+}
+
+.ball2 {
+  animation: rotate1 4500ms ease-in-out 150ms infinite;
+}
+
+.ball3 {
+  animation: rotate1 4500ms ease-in-out 250ms infinite;
+}
+
+.ball4 {
+  animation: rotate1 4500ms ease-in-out 350ms infinite;
+}
+
+.ball5 {
+  animation: rotate1 4500ms ease-in-out 450ms infinite;
+}
+
+.ball6 {
+  animation: rotate1 4500ms ease-in-out 550ms infinite;
+}
+
+.ball7 {
+  animation: rotate1 4500ms ease-in-out 650ms infinite;
+}
+
+.ball8 {
+  animation: rotate1 4500ms ease-in-out 750ms infinite;
+}
+
+.ball9 {
+  animation: rotate1 4500ms ease-in-out 850ms infinite;
+}
+
+.ball10 {
+  animation: rotate1 4500ms ease-in-out 950ms infinite;
 }
 
 @keyframes rotate1 {
-  10% {
-    transform: rotateX(-135deg) rotateY(-135deg);
-  }
-
-  80% {
-    transform: rotateX(-235deg) rotateY(-325deg);
+  100% {
+    transform: rotateY(-180deg) rotateX(-180deg);
   }
 }
+

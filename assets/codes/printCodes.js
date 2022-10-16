@@ -1,5 +1,5 @@
 function loadCodeContainerHtml() {
-  fetch('../public/codes/codes.html')
+  fetch('../assets/codes/codes.html')
     .then(res => res.text())
     .then(html => {
       document.querySelector('body').innerHTML += html;
@@ -10,7 +10,7 @@ function loadCodeContainerHtml() {
 
 function loadCodeContainerCssLink() {
   const linkCssFile = document.createElement('link')
-  linkCssFile.setAttribute('href', `http://${window.location.host}/public/codes/codes.css`)
+  linkCssFile.setAttribute('href', `http://${window.location.host}/assets/codes/codes.css`)
   linkCssFile.setAttribute('rel', 'stylesheet')
   
   document.querySelector('head').appendChild(linkCssFile)

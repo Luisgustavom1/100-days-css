@@ -54,6 +54,10 @@ function getTabWidth(lines) {
 
 function loadCodeContent(source, target) {
   const codeContent = source.innerHTML
+  if (!codeContent) {
+    target.style.display = 'none'
+    return;
+  }
   const codeContentLines = codeContent.split('\n')
   const tabWidth = getTabWidth(codeContentLines)
   const codeFormated = codeContentLines.map(line => addNbspInLine(line, tabWidth))

@@ -10,7 +10,7 @@ function loadCodeContainerHtml() {
 
 function loadCodeContainerCssLink() {
   const linkCssFile = document.createElement('link')
-  linkCssFile.setAttribute('href', `http://${window.location.host}/assets/codes/codes.css`)
+  linkCssFile.setAttribute('href', `//${window.location.host}/assets/codes/codes.css`)
   linkCssFile.setAttribute('rel', 'stylesheet')
   
   document.querySelector('head').appendChild(linkCssFile)

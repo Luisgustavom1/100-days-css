@@ -27,7 +27,7 @@ body {
   min-width: calc(375px - 32px);
 
   border-radius: 6px;
-  padding: 40px 16px;
+  padding: 40px 16px 16px;
 
   background-color: #151718;
   color: #477682;
@@ -45,7 +45,7 @@ body {
 
   border: none;
 
-  /* overflow: hidden; */
+  overflow: hidden;
   resize: none;
 }
 

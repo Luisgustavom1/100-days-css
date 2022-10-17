@@ -31,9 +31,8 @@ function loadCodesContent() {
 }
 
 // nbsp - Non breaking space
-const addNbspInLine = (line, tabWidth) => {
-  const nbsp = '&nbsp;'
-  return line.replace(new RegExp(`^\\s{${tabWidth}}`, 'g'), "").replace(/ /g, nbsp)
+const maintainDefaultTabWidth = (line, tabWidth) => {
+  return line.replace(new RegExp(`^\\s{${tabWidth}}`, 'g'), "")
 }
 
 function getTabWidth(lines) {
@@ -60,10 +59,9 @@ function loadCodeContent(source, target) {
   }
   const codeContentLines = codeContent.split('\n')
   const tabWidth = getTabWidth(codeContentLines)
-  const codeFormated = codeContentLines.map(line => addNbspInLine(line, tabWidth))
-  codeFormated.forEach(line => {
-    target.innerHTML += line + '<br/>'
-  })
+  const codeFormated = codeContentLines.map(line => maintainDefaultTabWidth(line, tabWidth)).join('\n')
+
+  target.querySelector('textarea').value = codeFormated;
 }
 
 loadCodeContainerCssLink()

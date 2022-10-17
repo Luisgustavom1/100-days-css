@@ -39,14 +39,13 @@ body {
 
 .code textarea {
   width: 100%;
-  height: 100%;
 
   background: none;
   color: inherit;
 
   border: none;
 
-  overflow: hidden;
+  /* overflow: hidden; */
   resize: none;
 }
 

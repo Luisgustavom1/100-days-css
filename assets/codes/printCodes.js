@@ -30,7 +30,6 @@ function loadCodesContent() {
   loadCodeContent(jsCodeEl, jsCodeContainer)
 }
 
-// nbsp - Non breaking space
 const maintainDefaultTabWidth = (line, tabWidth) => {
   return line.replace(new RegExp(`^\\s{${tabWidth}}`, 'g'), "")
 }
@@ -51,17 +50,20 @@ function getTabWidth(lines) {
   }, undefined)
 }
 
-function loadCodeContent(source, target) {
+function loadCodeContent(source, targetElContainer) {
   const codeContent = source.innerHTML
   if (!codeContent) {
-    target.style.display = 'none'
+    targetElContainer.style.display = 'none'
     return;
   }
   const codeContentLines = codeContent.split('\n')
   const tabWidth = getTabWidth(codeContentLines)
   const codeFormated = codeContentLines.map(line => maintainDefaultTabWidth(line, tabWidth)).join('\n')
 
-  target.querySelector('textarea').value = codeFormated;
+  const targetElTextarea = targetElContainer.querySelector('textarea')
+
+  targetElTextarea.value = codeFormated;
+  targetElTextarea.style.height = targetElTextarea.scrollHeight + 'px'
 }
 
 loadCodeContainerCssLink()

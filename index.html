@@ -14,22 +14,63 @@
   <main class="container">
     <h1 class="title">100 days CSS</h1>
     <section class="links-container">
-      <a class="button" href="pinterest-layout/index.html">
+      <!-- <a class="button" href="pinterest-layout/index.html">
         Pinterest Layout
-      </a>
+      </a> -->
     </section>
   </main>
   <script>
+    const ANCHOR_LINK_CLASS = "link-card"
     const linksContainerEl = document.querySelector('.links-container');
     const CSS_DAYS = [3, 8, 23, 28, 98, 72];
+    const iframes = []
 
     CSS_DAYS.forEach(cssDay => {
-      const linkEl = document.createElement('a');
-      linkEl.setAttribute('href', `day${cssDay}/index.html`);
-      linkEl.classList.add('button')
-      linkEl.innerHTML = `Day ${cssDay}`;
-      linksContainerEl.appendChild(linkEl);
+      const cardLinkHtml = `
+        <a href="day${cssDay}/index.html" class="link-card">
+          ${createIframe(cssDay)}
+          <div class='overlay'></div>
+        </a>
+      `
+      linksContainerEl.innerHTML += cardLinkHtml;      
     })
+
+    addLoaderEventInIframe()
+
+    function createIframe(cssDay) {
+      return `
+        <iframe 
+          id="iframe-${cssDay}"
+          src="/day${cssDay}/index.html" 
+          title="Project day - ${cssDay}" 
+          frameborder="0" 
+          scrolling="no"
+          marginheight="0" 
+          marginwidth="0"
+          width="100%"
+          height="100%"
+          class="iframe-challenge"
+        ></iframe>
+      `;
+    }
+
+    function addLoaderEventInIframe() {
+      document.querySelector('iframe').addEventListener('load', (iframeElEvent) => {
+        const self = this;
+        console.log('self', self)
+        CSS_DAYS.forEach((_, index) => {
+          hiddenButtonToSeeCodes(self[index]);
+        })
+      })
+    }
+
+    function hiddenButtonToSeeCodes(iframeEl) {
+      const buttonToSeeCodes = iframeEl.document.querySelector('a')
+      console.log('buttonToSeeCodes', buttonToSeeCodes)
+      if (!buttonToSeeCodes) return;
+      buttonToSeeCodes.style.display = 'none';
+      return
+    }
   </script>
 </body>
 </html>

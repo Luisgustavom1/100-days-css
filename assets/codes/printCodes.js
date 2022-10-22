@@ -20,18 +20,30 @@ function loadCodesContent() {
   const htmlCodeContainer = document.querySelector('.html-code')
   const cssCodeContainer = document.querySelector('.css-code')
   const jsCodeContainer = document.querySelector('.js-code')
-
+  
   const htmlCodeEl = document.querySelector('body').children[0]
   const cssCodeEl = document.querySelector('style')
   const jsCodeEl = document.querySelector('script')
-
+  
   loadCodeContent(htmlCodeEl, htmlCodeContainer)
   loadCodeContent(cssCodeEl, cssCodeContainer)
   loadCodeContent(jsCodeEl, jsCodeContainer)
 }
 
-const maintainDefaultTabWidth = (line, tabWidth) => {
-  return line.replace(new RegExp(`^\\s{${tabWidth}}`, 'g'), "")
+function loadCodeContent(source, targetElContainer) {
+  const codeContent = source.innerHTML
+  if (!codeContent) {
+    targetElContainer.style.display = 'none'
+    return;
+  }
+  const codeContentLines = codeContent.split('\n')
+  const tabWidth = getTabWidth(codeContentLines)
+  const codeFormated = codeContentLines.map(line => maintainDefaultTabWidth(line, tabWidth)).join('\n')
+
+  const targetElTextarea = targetElContainer.querySelector('textarea')
+
+  targetElTextarea.value = codeFormated;
+  targetElTextarea.style.height = targetElTextarea.scrollHeight + 'px'
 }
 
 function getTabWidth(lines) {
@@ -50,20 +62,8 @@ function getTabWidth(lines) {
   }, undefined)
 }
 
-function loadCodeContent(source, targetElContainer) {
-  const codeContent = source.innerHTML
-  if (!codeContent) {
-    targetElContainer.style.display = 'none'
-    return;
-  }
-  const codeContentLines = codeContent.split('\n')
-  const tabWidth = getTabWidth(codeContentLines)
-  const codeFormated = codeContentLines.map(line => maintainDefaultTabWidth(line, tabWidth)).join('\n')
-
-  const targetElTextarea = targetElContainer.querySelector('textarea')
-
-  targetElTextarea.value = codeFormated;
-  targetElTextarea.style.height = targetElTextarea.scrollHeight + 'px'
+const maintainDefaultTabWidth = (line, tabWidth) => {
+  return line.replace(new RegExp(`^\\s{${tabWidth}}`, 'g'), "")
 }
 
 loadCodeContainerCssLink()

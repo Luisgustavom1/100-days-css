@@ -1,12 +1,5 @@
-function loadCodeContainerHtml() {
-  fetch('../assets/codes/codes.html')
-    .then(res => res.text())
-    .then(html => {
-      document.querySelector('body').innerHTML += html;
-      
-      loadCodesContent()
-    })
-}
+loadCodeContainerCssLink()
+loadCodeContainerHtml()
 
 function loadCodeContainerCssLink() {
   const linkCssFile = document.createElement('link')
@@ -14,6 +7,18 @@ function loadCodeContainerCssLink() {
   linkCssFile.setAttribute('rel', 'stylesheet')
   
   document.querySelector('head').appendChild(linkCssFile)
+}
+
+function loadCodeContainerHtml() {
+  fetch('../assets/codes/codes.html')
+    .then(res => res.text())
+    .then(html => {
+      const wrapper = document.createElement('div')
+      wrapper.innerHTML = html
+      document.querySelector('body').appendChild(wrapper)
+      
+      loadCodesContent()
+    })
 }
 
 function loadCodesContent() {
@@ -34,22 +39,6 @@ const maintainDefaultTabWidth = (line, tabWidth) => {
   return line.replace(new RegExp(`^\\s{${tabWidth}}`, 'g'), "")
 }
 
-function getTabWidth(lines) {
-  return lines.reduce((acc, current) => {
-    let currentTabWidth;
-    const lineInChars = current.split('');
-
-    for (let i = 0; i < lineInChars.length; i++) {
-      if (lineInChars[i] !== ' ') {
-        currentTabWidth = i;
-        break
-      }
-    }
-
-    return currentTabWidth <= (acc || currentTabWidth) ? currentTabWidth : acc
-  }, undefined)
-}
-
 function loadCodeContent(source, targetElContainer) {
   const codeContent = source.innerHTML
   if (!codeContent) {
@@ -66,5 +55,18 @@ function loadCodeContent(source, targetElContainer) {
   targetElTextarea.style.height = targetElTextarea.scrollHeight + 'px'
 }
 
-loadCodeContainerCssLink()
-loadCodeContainerHtml()
+function getTabWidth(lines) {
+  return lines.reduce((acc, current) => {
+    let currentTabWidth;
+    const lineInChars = current.split('');
+
+    for (let i = 0; i < lineInChars.length; i++) {
+      if (lineInChars[i] !== ' ') {
+        currentTabWidth = i;
+        break
+      }
+    }
+
+    return currentTabWidth <= (acc || currentTabWidth) ? currentTabWidth : acc
+  }, undefined)
+}

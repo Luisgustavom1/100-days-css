@@ -14,6 +14,7 @@
 
 html {
   font-family: 'Roboto', sans-serif;
+  font-size: 14px;
 }
 
 body {
@@ -31,14 +32,13 @@ body {
 }
 
 .links-container {
-  width: 100vw;
-
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-  justify-items: center;
   gap: 16px;
-
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));  
+  justify-items: center;
   margin-top: 60px;
+  padding: 0 16px;
+  width: 100vw;
 }
 
 .button {
@@ -47,7 +47,7 @@ body {
   color: var(--contrast-color);
   background-color: var(--primary);
 
-  width: 160px;
+  width: 10rem;
   height: 60px;
 
   border-radius: 12px;
@@ -56,4 +56,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
 }
